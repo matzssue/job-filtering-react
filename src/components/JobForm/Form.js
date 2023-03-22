@@ -38,8 +38,9 @@ const Form = () => {
       <input
         type="text"
         id="position"
-        value={jobCtx.position}
+        value={informations.position}
         name="position"
+        onChange={(e) => setInformations({ position: e.target.value })}
       />
 
       <label htmlFor="role">Role:</label>
@@ -50,7 +51,8 @@ const Form = () => {
         type="text"
         id="contract"
         name="contract"
-        value={jobCtx.contract}
+        value={informations.contract}
+        onChange={(e) => setInformations({ contract: e.target.value })}
       />
 
       <label htmlFor="location">Location:</label>
@@ -58,7 +60,8 @@ const Form = () => {
         type="text"
         id="location"
         name="location"
-        value={jobCtx.location}
+        value={informations.location}
+        onChange={(e) => setInformations({ location: e.target.value })}
       />
 
       <label htmlFor="languages">Languages:</label>
@@ -66,10 +69,17 @@ const Form = () => {
         type="text"
         id="languages"
         name="languages"
-        value={jobCtx.languages}
+        value={informations.languages}
+        onChange={(e) => setInformations({ languages: e.target.value })}
       />
       <label htmlFor="tools">Tools:</label>
-      <input type="text" id="tools" name="tools" value={jobCtx.tools} />
+      <input
+        type="text"
+        id="tools"
+        name="tools"
+        value={informations.tools}
+        onChange={(e) => setInformations({ tools: e.target.value })}
+      />
 
       <button type="submit">Submit</button>
     </form>
