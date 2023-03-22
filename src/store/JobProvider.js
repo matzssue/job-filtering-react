@@ -4,16 +4,33 @@ import { useReducer } from "react";
 
 const defaultJob = {
   items: [],
+  company: "",
+  new: true,
+  featured: false,
+  position: "",
+  role: "",
+  contract: "",
+  location: "",
+  languages: [],
+  tools: [],
 };
 
 const formReducer = (state, action) => {
   switch (action.type) {
     case "UPDATE_VALUE":
       return {
+        ...state,
+        [action.payload.name]: action.payload.value,
+      };
+    case "ADD_ITEM":
+      return {
+        ...state,
         items: state.items.concat(action.item),
       };
     case "RESET_VALUES":
-      return {};
+      return {
+        state,
+      };
     default:
       return state;
   }
@@ -21,25 +38,34 @@ const formReducer = (state, action) => {
 const JobProvider = (props) => {
   const [jobState, dispatch] = useReducer(formReducer, defaultJob);
 
-  const addInfomationHandler = (item) => {
-    dispatch({
-      type: "UPDATE_VALUE",
-      item: item,
-    });
+  const handleChange = (name, value) => {
+    dispatch({ type: "UPDATE_VALUE", payload: { name: name, value: value } });
+  };
+  console.log(jobState);
+  const addJobHandler = (item) => {
+    dispatch({ type: "UPDATE_VALUE", items: item });
   };
 
   const resetValues = (item) => {
     dispatch({
       type: "RESET_VALUES",
-      ...jobState,
-      item: item,
     });
   };
 
   const jobContext = {
     items: jobState.items,
-    addJob: addInfomationHandler,
+    company: jobState.company,
+    new: true,
+    featured: false,
+    position: jobState.position,
+    role: jobState.role,
+    contract: jobState.contract,
+    location: jobState.location,
+    languages: jobState.languages,
+    tools: jobState.tools,
+    addJob: addJobHandler,
     reset: resetValues,
+    change: handleChange,
   };
 
   return (
