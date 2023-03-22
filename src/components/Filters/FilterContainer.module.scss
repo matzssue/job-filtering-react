@@ -1,0 +1,18 @@
+.container {
+  width: 50vw;
+  margin: 1rem auto;
+  height: auto;
+  background-color: rgba(0, 223, 194, 0.3);
+  ul {
+    display: flex;
+    gap: 15px;
+    list-style: none;
+    padding: 1rem 0.5rem;
+    li {
+      padding: 1rem;
+      background-color: rgba(0, 223, 194, 0.5);
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
