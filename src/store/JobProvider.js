@@ -4,15 +4,17 @@ import { useReducer } from "react";
 
 const defaultJob = {
   items: [],
-  company: "",
-  new: true,
-  featured: false,
-  position: "",
-  role: "",
-  contract: "",
-  location: "",
-  languages: [],
-  tools: [],
+  data: {
+    company: "",
+    new: true,
+    featured: false,
+    position: "",
+    role: "",
+    contract: "",
+    location: "",
+    languages: [],
+    tools: [],
+  },
 };
 
 const formReducer = (state, action) => {
@@ -20,16 +22,20 @@ const formReducer = (state, action) => {
     case "UPDATE_VALUE":
       return {
         ...state,
-        [action.payload.name]: action.payload.value,
+        data: {
+          ...state.data,
+          [action.payload.name]: action.payload.value,
+        },
       };
     case "ADD_ITEM":
       return {
         ...state,
-        items: state.items.concat(action.item),
+        items: state.items.concat(action.payload),
       };
-    case "RESET_VALUES":
+    case "RESET_FORM":
       return {
-        state,
+        ...state,
+        data: defaultJob.data,
       };
     default:
       return state;
@@ -39,32 +45,38 @@ const JobProvider = (props) => {
   const [jobState, dispatch] = useReducer(formReducer, defaultJob);
 
   const handleChange = (name, value) => {
-    dispatch({ type: "UPDATE_VALUE", payload: { name: name, value: value } });
-  };
-  console.log(jobState);
-  const addJobHandler = (item) => {
-    dispatch({ type: "UPDATE_VALUE", items: item });
+    dispatch({
+      type: "UPDATE_VALUE",
+      payload: { name: name, value: value },
+    });
   };
 
-  const resetValues = (item) => {
+  const addJobHandler = () => {
+    dispatch({ type: "ADD_ITEM", payload: jobContext.data });
+  };
+
+  const resetFormHandler = () => {
     dispatch({
-      type: "RESET_VALUES",
+      type: "RESET_FORM",
     });
   };
 
   const jobContext = {
     items: jobState.items,
-    company: jobState.company,
-    new: true,
-    featured: false,
-    position: jobState.position,
-    role: jobState.role,
-    contract: jobState.contract,
-    location: jobState.location,
-    languages: jobState.languages,
-    tools: jobState.tools,
+    data: {
+      company: jobState.data.company,
+      new: true,
+      featured: false,
+      position: jobState.data.position,
+      role: jobState.data.role,
+      contract: jobState.data.contract,
+      location: jobState.data.location,
+      languages: jobState.data.languages,
+      tools: jobState.data.tools,
+    },
+
     addJob: addJobHandler,
-    reset: resetValues,
+    reset: resetFormHandler,
     change: handleChange,
   };
 
