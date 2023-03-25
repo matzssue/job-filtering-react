@@ -1,15 +1,19 @@
 import styles from "./FilterContainer.module.scss";
-
+import { useContext } from "react";
+import JobContext from "../../store/job-context";
 const FilterContainer = () => {
+  const jobCtx = useContext(JobContext);
+  const filters = jobCtx.filterList.map((filter) => {
+    return (
+      <li key={filter}>
+        <button>{filter}</button>
+      </li>
+    );
+  });
+
   return (
     <div className={styles.container}>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-      </ul>
+      <ul>{filters}</ul>
     </div>
   );
 };

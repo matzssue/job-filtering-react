@@ -13,9 +13,11 @@ const JobContext = React.createContext({
     languages: [],
     tools: [],
   },
+  filterList: [],
   addJob: () => {},
   reset: () => {},
   change: () => {},
+  addFilter: () => {},
 });
 
 export default JobContext;

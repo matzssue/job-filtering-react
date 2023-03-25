@@ -4,6 +4,7 @@ import { useReducer } from "react";
 
 const defaultJob = {
   items: [],
+  currentFormIndex: 0,
   data: {
     company: "",
     new: true,
@@ -15,6 +16,7 @@ const defaultJob = {
     languages: [],
     tools: [],
   },
+  filterList: [],
 };
 
 const formReducer = (state, action) => {
@@ -30,12 +32,18 @@ const formReducer = (state, action) => {
     case "ADD_ITEM":
       return {
         ...state,
+        currentFormIndex: +state.currentFormIndex + 1,
         items: state.items.concat(action.payload),
       };
     case "RESET_FORM":
       return {
         ...state,
         data: defaultJob.data,
+      };
+    case "FILTER_LIST":
+      return {
+        ...state,
+        filterList: state.filterList.concat(action.filter),
       };
     default:
       return state;
@@ -60,10 +68,17 @@ const JobProvider = (props) => {
       type: "RESET_FORM",
     });
   };
+  const AddfilterHandler = (filter) => {
+    dispatch({
+      type: "FILTER_LIST",
+      filter: filter,
+    });
+  };
 
   const jobContext = {
     items: jobState.items,
     data: {
+      currentFormIndex: jobState.currentFormIndex,
       company: jobState.data.company,
       new: true,
       featured: false,
@@ -74,10 +89,12 @@ const JobProvider = (props) => {
       languages: jobState.data.languages,
       tools: jobState.data.tools,
     },
+    filterList: jobState.filterList,
 
     addJob: addJobHandler,
     reset: resetFormHandler,
     change: handleChange,
+    addFilter: AddfilterHandler,
   };
 
   return (

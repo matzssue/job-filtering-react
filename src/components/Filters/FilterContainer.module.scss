@@ -9,10 +9,17 @@
     list-style: none;
     padding: 1rem 0.5rem;
     li {
-      padding: 1rem;
       background-color: rgba(197, 48, 93, 0.7);
       width: 100%;
       text-align: center;
+      button {
+        width: 100%;
+        height: 100%;
+        padding: 0.4rem 1rem;
+        background-color: rgba(197, 48, 93, 0.7);
+        border: none;
+        cursor: pointer;
+      }
     }
   }
 }
