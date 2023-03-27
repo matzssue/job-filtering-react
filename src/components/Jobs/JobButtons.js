@@ -5,8 +5,10 @@ const JobButtons = (props) => {
   const jobCtx = useContext(JobContext);
 
   const buttonFilterClickHandler = (e) => {
-    !jobCtx.filterList.includes(e.target.name) &&
-      jobCtx.addFilter(e.target.name);
+    console.log(jobCtx.filterList.includes(e.target.name));
+    if (jobCtx.filterList.includes(e.target.name)) return;
+    jobCtx.addFilter(e.target.name);
+    console.log(jobCtx.filterList);
   };
 
   const buttons = props.buttonsArray.map((button) => {

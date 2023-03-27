@@ -45,6 +45,13 @@ const formReducer = (state, action) => {
         ...state,
         filterList: state.filterList.concat(action.filter),
       };
+    case "REMOVE_FILTER":
+      return {
+        ...state,
+        filterList: state.filterList.filter(
+          (filter) => filter !== action.target
+        ),
+      };
     default:
       return state;
   }
@@ -74,6 +81,12 @@ const JobProvider = (props) => {
       filter: filter,
     });
   };
+  const removeFilterHander = (target) => {
+    dispatch({
+      type: "REMOVE_FILTER",
+      target: target,
+    });
+  };
 
   const jobContext = {
     items: jobState.items,
@@ -95,6 +108,7 @@ const JobProvider = (props) => {
     reset: resetFormHandler,
     change: handleChange,
     addFilter: AddfilterHandler,
+    removeFilter: removeFilterHander,
   };
 
   return (

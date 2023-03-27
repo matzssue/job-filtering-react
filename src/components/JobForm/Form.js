@@ -30,7 +30,7 @@ const Form = () => {
         id="position"
         name="position"
         required
-        // value={jobCtx.data.position}
+        value={jobCtx.data.position}
         onChange={(e) => jobCtx.change(e.target.name, e.target.value)}
       />
 
@@ -40,7 +40,7 @@ const Form = () => {
         id="role"
         name="role"
         required
-        // value={jobCtx.data.role}
+        value={jobCtx.data.role}
         onChange={(e) => jobCtx.change(e.target.name, e.target.value)}
       >
         <option value="">--Select an option--</option>
@@ -54,7 +54,7 @@ const Form = () => {
         id="contract"
         name="contract"
         required
-        // value={jobCtx.data.contract}
+        value={jobCtx.data.contract}
         onChange={(e) => jobCtx.change(e.target.name, e.target.value)}
       >
         {" "}
@@ -68,7 +68,7 @@ const Form = () => {
         type="text"
         id="location"
         name="location"
-        // value={jobCtx.data.location}
+        value={jobCtx.data.location}
         onChange={(e) => jobCtx.change(e.target.name, e.target.value)}
       />
 
@@ -87,7 +87,7 @@ const Form = () => {
           )
         }
       >
-        <option value="">--Select an options--</option>
+        {/* <option value="">--Select an options--</option> */}
         <option value="HTML">HTML</option>
         <option value="CSS">CSS</option>
         <option value="JavaScript">JavaScript</option>

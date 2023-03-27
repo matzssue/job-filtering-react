@@ -3,10 +3,18 @@ import { useContext } from "react";
 import JobContext from "../../store/job-context";
 const FilterContainer = () => {
   const jobCtx = useContext(JobContext);
-  const filters = jobCtx.filterList.map((filter) => {
+
+  const removeFilterHandler = (e) => {
+    jobCtx.removeFilter(e.target.name);
+    console.log(jobCtx.filterList);
+  };
+  // console.log(jobCtx.filterList);
+  let filters = jobCtx.filterList.map((filter) => {
     return (
       <li key={filter}>
-        <button>{filter}</button>
+        <button name={filter} onClick={removeFilterHandler}>
+          {filter}
+        </button>
       </li>
     );
   });

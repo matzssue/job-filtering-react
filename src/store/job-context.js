@@ -18,6 +18,7 @@ const JobContext = React.createContext({
   reset: () => {},
   change: () => {},
   addFilter: () => {},
+  removeFilter: () => {},
 });
 
 export default JobContext;

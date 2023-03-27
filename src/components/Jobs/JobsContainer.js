@@ -7,9 +7,17 @@ import JobContext from "../../store/job-context";
 
 const JobsContainer = () => {
   const jobCtx = useContext(JobContext);
-  console.log(jobCtx.items);
 
-  const jobList = jobCtx.items.map((job) => {
+  let jobs = jobCtx.items;
+  if (jobCtx.filterList.length > 0) {
+    jobs = jobCtx.items.filter((item) => {
+      const array1 = [item.role, item.contract, ...item.languages];
+      return jobCtx.filterList.every((filter) => array1.includes(filter));
+    });
+    console.log(jobs);
+  }
+
+  const jobList = jobs.map((job) => {
     const uniqueKey = uuidv4();
     const buttonsArray = [job.role, job.contract, ...job.languages];
 
